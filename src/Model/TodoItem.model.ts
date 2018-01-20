@@ -1,4 +1,4 @@
-export default class TodoItem {
+export class TodoItemModel {
     private _time = '2018-01-07';
     private _detail = 'todo something';
 

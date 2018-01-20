@@ -15,8 +15,14 @@ export class TodoList extends ViewBase<TodoListViewModel> {
 
     return (
       <div className="todoList">
-        <p>{vm.detail}</p>
-        <p>{vm.time}</p>
+        {
+          vm.list.list.originArray.map((value, index) => {
+            return <div key={index}>
+              <p>{value.detail}</p>
+              <p>{value.time}</p>
+            </div>;
+          })
+        }
         <a onClick={() => vm.onButtonClicked()}>click me</a>
       </div>
     );
