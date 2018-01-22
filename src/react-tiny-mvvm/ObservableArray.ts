@@ -15,7 +15,6 @@ export class ObservableArray<E> {
 
     constructor(
         proxiedArray?: Array<E>
-        // tslint:disable-next-line:no-empty
     ) {
         if (proxiedArray) {
             this.proxiedArray = proxiedArray;

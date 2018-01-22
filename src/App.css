@@ -19,6 +19,23 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.App-center {
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.App-title {
+  text-align: center;
+  margin-bottom: 50px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }

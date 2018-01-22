@@ -1,23 +1,29 @@
 import * as React from 'react';
 import './App.css';
 
-import { TodoList } from './TodoList/TodoList.view';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { TodoList } from './Components/TodoList/TodoList.view';
+import { TodoInput } from './Components/TodoInput/TodoInput.view';
 
 // const logo = require('./logo.svg');
 
 class App extends React.Component {
   render() {
     return (
-      // <div className="App">
-      //   <div className="App-header">
-      //     <img src={logo} className="App-logo" alt="logo" />
-      //     <h2>Welcome to React</h2>
-      //   </div>
-      //   <p className="App-intro">
-      //     To get started, edit <code>src/App.tsx</code> and save to reload.
-      //   </p>
-      // </div>
-      <TodoList/>
+      <div className="container-fluid App-center">
+        <div className="col-md-3" />
+        <div className="col-md-6">
+          <h1 className="App-title">Todo List Demo    <small>for React Tiny Mvvm</small></h1>
+          <div className="row">
+            <TodoInput />
+          </div>
+          <div className="row">
+            <TodoList />
+          </div>
+        </div>
+        <div className="col-md-3" />
+      </div>
     );
   }
 }

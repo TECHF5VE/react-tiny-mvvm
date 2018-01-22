@@ -5,6 +5,12 @@ export interface Token {
 export class DefaultToken implements Token {
     public name = '';
 
+    static create(name: string) {
+        const result = new DefaultToken();
+        result.name = name;
+        return result;
+    }
+
     getKeyName(): string {
         return this.name;
     }
@@ -23,10 +29,10 @@ export class Messenger {
     static readonly Default: Messenger = new Messenger();
 
     // tslint:disable-next-line:no-any
-    private observedMap: Map<string, ((param: any) => void)[]>;
+    private observedMap: Map<string, ((param: any) => void)[]> = new Map();
 
     // tslint:disable-next-line:no-any
-    public register<T extends Token = DefaultToken, M = any>(token: T, message: M, callback: (param: M) => void) {
+    public register<T extends Token = DefaultToken, M = any>(token: T, callback: (param: M) => void) {
         const keyStr = token.getKeyName();
         const callbackArr = this.observedMap.get(keyStr);
         if (callbackArr) {

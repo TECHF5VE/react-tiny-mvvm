@@ -3,7 +3,7 @@ import { ViewBase } from '../react-tiny-mvvm/ViewBase';
 import { ObservableArray } from './ObservableArray';
 // import _ from 'lodash';
 
-export const NotifyProperty = ({ isObservableArrayProperty = false }) => {
+export const NotifyProperty = (param: { isObservableArrayProperty: boolean } = { isObservableArrayProperty: false }) => {
     // tslint:disable-next-line:no-any
     return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
         const setter = descriptor.set;
@@ -11,6 +11,18 @@ export const NotifyProperty = ({ isObservableArrayProperty = false }) => {
 
         if (!getter) {
             throw new Error('Decorated property must have a getter.');
+        } else {
+            descriptor.get = function (this: ViewModelBase) {
+                // tslint:disable-next-line:no-any
+                const result = getter.call(this) as ObservableArray<any>;
+                if (param.isObservableArrayProperty && !result.notifyCallBack) {
+                    // tslint:disable-next-line:no-any
+                    result.notifyCallBack = (array: any[]) => {
+                        this.notifyValueChanged(propertyKey, array);
+                    };
+                }
+                return result;
+            };
         }
 
         if (setter) {
@@ -19,12 +31,15 @@ export const NotifyProperty = ({ isObservableArrayProperty = false }) => {
                 setter.call(this, value);
                 this.notifyValueChanged(propertyKey, descriptor.value);
 
-                // tslint:disable-next-line:no-any
-                if (isObservableArrayProperty && !(this[propertyKey] as ObservableArray<any>).notifyCallBack) {
+                if (param.isObservableArrayProperty) {
                     // tslint:disable-next-line:no-any
-                    (this[propertyKey] as ObservableArray<any>).notifyCallBack = (array: any[]) => {
-                        this.notifyValueChanged(propertyKey, array);
-                    };
+                    const result = getter.call(this) as ObservableArray<any>;
+                    if (!result.notifyCallBack) {
+                        // tslint:disable-next-line:no-any
+                        result.notifyCallBack = (array: any[]) => {
+                            this.notifyValueChanged(propertyKey, array);
+                        };
+                    }
                 }
             };
         } else {
@@ -68,7 +83,31 @@ export class ViewModelBase {
     }
 }
 
-export function connectVVM(view: ViewBase, viewmodel: ViewModelBase) {
-    view.viewmodel = viewmodel;
-    viewmodel.view = view;
+export function ConnetVVM<VM extends ViewModelBase>(viewmodel: VM) {
+    // tslint:disable-next-line:no-any
+    return function <T extends { new(...args: any[]): ViewBase }>(target: T) {
+        const original = target;
+
+        // tslint:disable-next-line:no-any
+        function construct(constructor: T, args: any[]) {
+            // tslint:disable-next-line:no-any
+            let c: any = function (this: any) {
+                return constructor.apply(this, args);
+            };
+            c.prototype = constructor.prototype;
+            return new c();
+        }
+
+        // tslint:disable-next-line:no-any
+        let f: any = function (...args: any[]) {
+            const result = construct(original, args);
+            result.viewmodel = viewmodel;
+            viewmodel.view = result;
+            return result;
+        };
+
+        f.prototype = original.prototype;
+
+        return f;
+    };
 }

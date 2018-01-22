@@ -1,0 +1,14 @@
+.TodoList-container {
+    margin-top: 20px;
+    background-color: #eeeeee;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.TodoList-row {
+    margin-bottom: 10px;
+    display: flex;
+    display: -webkit-flex;
+
+    align-items: center;
+}
