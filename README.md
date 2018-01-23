@@ -75,7 +75,7 @@ Messenger.Default.send(DefaultToken.create('todoSometing'), 'a message');
 
 // Place where you want to accept message.
 Messenger.Default.register(DefaultToken.create('todoSomething'), (msg: string) => {
-  console.alert(msg); // parameter of msg will be 'a message'
+  console.log(msg); // parameter of msg will be 'a message'
 });
 ```
 
