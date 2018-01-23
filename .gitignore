@@ -79,4 +79,4 @@ typings/
 # dotenv environment variables file
 .env
 
->>>>>>> 01b95938059bf9f85f351b48837c2fa0f48b222f
+dist
