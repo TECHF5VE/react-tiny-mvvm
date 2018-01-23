@@ -5,7 +5,7 @@
 
 `React Tine Mvvm` has future s as follow:
 
-- `Message` is used to connect different components. You can simply use  `send`/`register` pattern to complete the communication between tow components.
+- `Message` is used to connect different components. You can simply use  `send`/`register` pattern to complete the communication between two components.
 - Peal the bussiness logic off the `View` (in tranditional react) and provide  `View`/`ViewModel` for developing in Mvvm pattern.
 - **Observable** Object and Array.
 - Unify the usage for Sync / Async operation.
@@ -107,6 +107,10 @@ yarn start
 - Observable object
 - Async operation optimizing
 - ...
+
+## Distribute
+
+> Under construction
 
 ## Contact
 
