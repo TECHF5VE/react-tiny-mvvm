@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ConnetVVM } from 'react-tiny-mvvm';
+import { ConnectVVM } from 'react-tiny-mvvm';
 import { TodoListViewModel } from './TodoList.viewmodel';
 import { ViewBase } from 'react-tiny-mvvm';
 
 import './TodoList.view.css';
 
-@ConnetVVM(TodoListViewModel.Instance)
+@ConnectVVM(TodoListViewModel.Instance)
 export class TodoList extends ViewBase<TodoListViewModel> {
   constructor(props: {}, contex: {}) {
     super(props, contex);

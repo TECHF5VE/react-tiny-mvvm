@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ViewBase } from 'react-tiny-mvvm';
-import { ConnetVVM } from 'react-tiny-mvvm';
+import { ConnectVVM } from 'react-tiny-mvvm';
 import { TodoInputViewModel } from './TodoInput.viewmodel';
 
-@ConnetVVM(TodoInputViewModel.Instance)
+@ConnectVVM(TodoInputViewModel.Instance)
 export class TodoInput extends ViewBase<TodoInputViewModel> {
     render() {
         const vm = this.viewmodel;

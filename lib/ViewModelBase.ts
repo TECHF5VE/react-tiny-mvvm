@@ -48,7 +48,7 @@ export const NotifyProperty = (param: { isObservableArrayProperty: boolean } = {
     };
 };
 
-export function ConnetVVM<VM extends ViewModelBase>(viewmodel: VM) {
+export function ConnectVVM<VM extends ViewModelBase>(viewmodel: VM) {
     // tslint:disable-next-line:no-any
     return function <T extends { new(...args: any[]): ViewBase }>(target: T) {
         const original = target;
