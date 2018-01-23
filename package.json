@@ -1,6 +1,6 @@
 {
   "name": "react-tiny-mvvm",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A light mvvm framework for react development.",
   "main": "dist/index",
   "typings": "dist/index",
